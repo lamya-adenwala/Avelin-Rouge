@@ -1,0 +1,179 @@
+# Replit Build Prompt — AVELIN ROUGE Homepage
+
+Copy everything below into Replit's AI prompt box.
+
+---
+
+Build a single static homepage for AVELIN ROUGE, an ultra-luxury fashion house. This is a frontend-only build — no backend, no database, no forms that submit anywhere, no authentication. Pure HTML/CSS/JS (or React if the tool defaults to it — either is fine, but keep it a single-page static site with no server logic). Search, Wishlist, Account, and Bag are UI-only (no real functionality needed — clicking Search can open a minimal overlay search bar with no real results logic; Wishlist/Account/Bag icons can be static, non-functional placeholders, or open an empty-state overlay). "Private Appointments" is a link that would open a separate page in the future — on this homepage, treat it as a placeholder navigation link/anchor (e.g. `href="#"` or `/appointments`), not an inline form on this page.
+
+## Brand Identity & Feeling
+
+This is not an ecommerce store. It is the digital front door of a fashion maison that feels like it has existed for generations — think old money, quiet luxury, European heritage, architectural precision. The visitor should feel like they've been let into a private world, not a shop. Every decision should be able to survive this test: does it feel timeless, expensive, effortless, and restrained? If something feels trendy, loud, playful, or "startup," remove it.
+
+Reference points for tone (do not copy, only channel the feeling):
+- Ferrari's homepage — cinematic, slow, confident reveal before any selling begins
+- Tiffany & Co. — elegant split-screen editorial layout, generous white space
+- Cartier — refined, confident, non-decorative typography
+
+## Design System (define this first, then build)
+
+**Colors** (use as CSS variables/tokens) — the core palette is Oxblood Red, Antique Gold, and Ivory; everything else is a supporting neutral:
+- Oxblood Red (primary brand color): #4A1420
+- Deep Burgundy (oxblood variant for depth/gradients): #5C1F2E
+- Antique Gold (accent — used for fine details only: hairlines, icon strokes, small labels, hover states, dividers, the AVELIN ROUGE wordmark treatment): #B08D57
+- Muted/Antiqued Gold (a slightly desaturated variant for larger accent use so it never looks shiny/bright): #9C7A4A
+- Ivory (primary background): #F7F1E6
+- Soft Cream (secondary background/section alternation): #F0E8D8
+- Earth Brown: #6B4E3D
+- Charcoal (primary text on ivory): #2A2624
+- Black: #16130F
+- Warm White: #FDFBF8
+
+Rules: nothing oversaturated, contrast stays subtle, backgrounds should lean ivory/cream with oxblood red and antique gold used deliberately as the two signature accent colors — oxblood for depth, weight, and emphasis (section backgrounds, buttons, the brand name), antique gold strictly for fine details (hairline dividers, icon outlines, small caps labels, hover underlines) so it reads as metallic trim, not a loud highlight. Gold should never appear as a large fill or feel bright/yellow — always muted and warm, like aged brass or antique jewelry, not new gold.
+
+**Typography:**
+- One display serif for headlines (something in the spirit of Canela, Freight Display, Playfair Display, or GT Sectra — pick one that reads as confident and non-decorative, not a cursive/script font)
+- One clean sans-serif for body and UI text (something like Neue Montreal, Söhne, or Inter — understated, excellent readability)
+- Type scale: define at least 5 sizes (e.g. hero 72–96px desktop, section heading 40–56px, subheading 24–28px, body 16–18px, small/label 12–13px with letterspacing)
+- Generous line-height on body copy (1.6–1.8)
+- Headlines should have tight, confident line-height (1.05–1.15) and can use slightly negative letter-spacing at large sizes
+
+**Spacing:**
+- 8-point spacing scale (8, 16, 24, 32, 48, 64, 96, 128, 160px)
+- Section vertical padding should never be less than 96px on desktop, 64px on mobile
+- Sections must never visually touch — always a clear breathing gap or a hairline divider (1px, low-opacity charcoal or beige)
+
+**Shape language:**
+- No rounded corners anywhere — buttons, images, cards, inputs must all be sharp, straight-edged rectangles
+- No shadows that look soft/playful — if depth is needed, use a thin 1px border or subtle flat offset, not a drop shadow
+- Straight architectural lines throughout; thin hairline dividers (1px) are the primary structural device
+
+**Grid:**
+- 12-column grid on desktop with generous outer margins (at least 64–96px)
+- Mobile: single column, generous side padding (24–32px), never edge-to-edge except for full-bleed imagery
+
+**Motion:**
+- Only slow, subtle, purposeful animation: gentle fade-ins on scroll (opacity + 10–20px translate), slow image reveals, smooth scrolling, 200–500ms transitions with an ease-out curve
+- No bounce, no spin, no playful easing, no parallax gimmicks
+- Hover states should be slow and quiet — e.g. a 400ms underline draw, a slow image zoom (scale 1 → 1.03 over 600ms), a subtle opacity or color shift. Never a snap or scale-pop.
+
+## Page Structure (build in this order, top to bottom)
+
+### 1. Hero Section (full viewport height)
+- Full-bleed, high-quality editorial-style image or muted video background (use a placeholder image from Unsplash — search terms like "architectural interior stone," "editorial fashion campaign minimal," or "luxury interior natural light")
+- Centered or left-aligned oversized serif wordmark/brand name, minimal supporting line beneath it (a single evocative sentence, not a tagline-sounding tagline — e.g. "Est. [year]. Crafted without compromise.")
+- No navigation clutter over the hero — just a thin, minimal top nav bar (see Navigation below) that sits quietly over the image, mostly transparent, text in warm white
+- On load: a slow fade-in of the wordmark (700–900ms) followed by the subline — nothing snappy
+- A single small scroll-indicator at the bottom center (a thin vertical line or minimal chevron), subtle fade animation
+
+### 2. Navigation (persistent, appears on all scroll positions after hero)
+
+Exact structure required:
+
+**Left/Center — brand + primary links:**
+- "AVELIN ROUGE" wordmark (treat this as the logo — set in the display serif, letterspaced, in antique gold or charcoal depending on scroll state)
+- Followed by four text links: **The House**, **The World**, **Journal**, **Shop**
+  - The House → anchors to the story/philosophy/heritage/founder section on this homepage
+  - The World → anchors to the Atelier / craftsmanship section on this homepage (or can represent the broader brand-world section — use your judgment to map it to the most fitting section built below)
+  - Journal → placeholder link (`href="#"`), represents a future editorial/blog page, not built yet
+  - Shop → placeholder link to the future Collections page (`href="#"` or `/collections`), not built yet
+
+**Right side — utility icons, in this exact order:**
+- Wishlist (thin outline heart icon)
+- Search (thin outline magnifying glass icon — clicking it should smoothly expand/open a minimal full-width or overlay search bar in the same restrained style, no functional search logic needed, just the UI interaction)
+- Account (thin outline person icon)
+- Bag (thin outline bag/tote icon, no item-count bubble needed, or a very minimal small numeral if you want to imply state)
+
+All icons should be custom-drawn thin line icons (1px stroke, no filled icon-library look), matching the architectural, non-rounded aesthetic — consistent stroke weight across all four.
+
+**Behavior:**
+- No dropdowns, no mega menu
+- Transparent over the hero (wordmark and icons in warm white/ivory), transitions to a solid ivory/cream background with a hairline bottom border (in antique gold or charcoal, low opacity) once the user scrolls past the hero — smooth 300ms transition, icon/text colors shift to charcoal on the solid background
+- On mobile: brand wordmark stays visible/centered or left-aligned; The House/The World/Journal/Shop collapse into a minimal hamburger icon (thin lines, no rounded box) opening a full-screen overlay menu in ivory/charcoal; Wishlist/Search/Account/Bag icons remain visible in a condensed top row, or Search and Wishlist can tuck into the overlay menu if space is tight — Account and Bag should always stay visible on mobile
+
+### 3. The House — Story, Philosophy & Heritage
+- Tiffany-style split screen: large editorial image on one side (roughly 50/50 or 55/45), text block on the other
+- This section should read as "The House" — introduce AVELIN ROUGE's story, philosophy, and heritage in one confident passage (3–5 sentences max). Touch on when/how the house was founded (invented placeholder heritage detail, e.g. "Since [year]"), what it stands for, and its philosophy of restraint and craftsmanship. Write actual placeholder copy in this voice, don't leave it as lorem ipsum.
+- Generous whitespace around the text block; text should not stretch full width — cap line length around 55–65 characters for readability
+- This section should be anchored/targetable so the "The House" nav link can scroll to it
+
+### 4. The Founder's Vision
+- Split-screen layout, alternating direction from the section above (if the previous section had image-left/text-right, this one should be image-right/text-left)
+- Portrait-style image of the founder (placeholder: a refined black-and-white or muted-tone portrait, editorial style, not a corporate headshot)
+- Founder name in display serif, a short honorific/role line beneath in small-caps or letterspaced sans-serif (e.g. "FOUNDER & CREATIVE DIRECTOR")
+- 2–3 short paragraphs written as the founder's own vision and philosophy — restrained and elegant, not salesy. Write real placeholder copy.
+- Optional: a single short pull-quote from the founder, set in larger italic serif, used sparingly as a visual break
+
+### 5. Craftsmanship / Philosophy Pillars
+- A row (desktop) / stacked (mobile) of 3 quiet pillars — e.g. "Heritage," "Precision," "Permanence" — each with a one-line description
+- No icons unless they're extremely minimal line-drawn marks (thin, architectural, monochrome) — avoid anything that looks like a generic icon library
+- Divided by thin vertical hairlines on desktop, horizontal hairlines on mobile
+
+### 6. The Collections (editorial teaser, not a product grid)
+- This is NOT the products/shop page — it's a teaser section that showcases the house's existing named collections and links out to the future Shop/Collections page
+- Feature exactly these three collections, each with its own large editorial image, the collection name in display serif, and one short evocative line of copy (not a description, more of a mood-setting sentence):
+  - **The Courtship Collection**
+  - **The Lingering Hour Collection**
+  - **The Riders Quadrant**
+- Layout: either a large magazine-style row of three (desktop) that stacks vertically on mobile, or a slow horizontal editorial arrangement — generous spacing between each, no cramped grid, closer to a fashion spread than a shop grid
+- Each collection block links out with an understated text link like "Discover →" (placeholder `href="#"`, since the dedicated Collections page will be built later)
+- Include one clear, understated section-level link/button such as "View All Collections →" pointing to the future Shop/Collections page
+
+### 7. The Atelier — Craftsmanship & Tailoring
+- A dedicated section (distinct from the Craftsmanship pillars above) that gives a real sense of place — this is where the garments are made
+- Use 2–4 large editorial images: interior shots of the atelier/workshop space (stone, wood, natural light), close-up shots of hands tailoring, fabric, thread, tools — placeholder imagery via Unsplash with search terms like "tailor atelier workshop," "bespoke tailoring hands," "fabric cutting table," "sewing atelier natural light"
+- Can use a layout of one large full-bleed or near-full-bleed image with a text overlay/adjacent block, plus a smaller supporting row of 2–3 detail images beneath (close-ups of stitching, fabric, tools)
+- Copy should speak to the tailoring process itself — time, hand-craftsmanship, precision, the human hand behind each garment. Write real placeholder copy in the brand voice, 2–4 sentences.
+- This section should be anchored/targetable so "The World" nav link can reasonably scroll here (or to a combined House/World narrative — use judgment on how The House vs The World sections divide the heritage/story content vs the atelier/craftsmanship content)
+
+### 8. Private Appointments — Bespoke, By Request
+- This section is a refined CTA/teaser, NOT an inline form — private appointments open on their own separate page (to be built later)
+- Framing copy: introduce the private appointment offering as fully bespoke — the house tailors each piece according to what the client wants, working from limited pieces and made-to-measure execution rather than off-the-shelf stock. Write real placeholder copy touching on: bespoke tailoring built around the client's vision, and the exclusivity of limited pieces / limited availability.
+- Visual treatment: can mirror the split-screen pattern (a quiet architectural/interior or fitting-room-style image on one side, copy + CTA on the other), or a full-width editorial moment with centered copy — either works as long as it feels like an invitation, not a form
+- A single, clear call-to-action button/link: **"Request a Private Appointment"** (or "Book a Private Appointment") — sharp rectangle, no rounded corners, quiet hover state (background/text slowly inverts over 300ms), label in small caps with letterspacing, gold or oxblood as the button's resting color
+- This button should link to a placeholder route (e.g. `href="#"` or `/appointments`) representing the separate appointments page that will be built later — do NOT build an inline form on the homepage for this
+
+### 9. Footer
+- Minimal, restrained — AVELIN ROUGE wordmark or monogram, a short address/contact line, social links as understated text (not icon buttons), copyright line
+- Include a compact secondary link row echoing the nav (The House, The World, Journal, Shop) plus Private Appointments, all as simple text links
+- Charcoal or oxblood background with warm ivory/gold text for contrast, OR keep it ivory with charcoal text — pick one and keep it consistent with the rest of the palette; if using oxblood/charcoal, antique gold works well as the link/hover color here
+- Thin hairline divider (antique gold, low opacity) above the footer separating it from the Private Appointments section
+
+## Interaction & Animation Details
+- All sections should fade/slide in gently as the user scrolls to them (intersection observer or equivalent) — opacity 0→1, translateY 20px→0, over 600–800ms, ease-out
+- Images should have a subtle slow zoom on hover where used as links (scale 1 to ~1.03, 600ms)
+- Text links should have a slow underline reveal on hover (draw left to right, 300–400ms) rather than an instant underline
+- No animation should ever feel snappy, bouncy, or "webby" — err slow
+
+## Responsive Behavior
+- Mobile is not just a squeezed desktop — re-check every split-screen section and stack it thoughtfully (image on top, text below, or vice versa depending on visual weight)
+- Typography must scale down proportionally but retain hierarchy — hero headline should still feel large and confident on mobile, not cramped
+- Maintain generous padding on mobile (min 24px sides) — never let text touch the edge of the screen
+- Navigation collapses to a minimal full-screen overlay menu as described above
+
+## Technical Requirements
+- Clean, semantic HTML (proper heading hierarchy, semantic sections, alt text on all images)
+- Accessible: sufficient color contrast on text, keyboard-navigable nav and form, visible focus states styled to match the aesthetic (thin outline in oxblood or charcoal, not a default blue browser outline)
+- Fast-loading: use optimized/compressed placeholder images, avoid heavy libraries
+- Structure the code so that adding future pages (About, Products, Contact) later would be straightforward — consistent nav component, consistent design tokens/CSS variables for color and spacing so future pages match without rework
+- Use placeholder images from a free source (Unsplash) with editorial/architectural/fashion search terms — do not use cartoonish or generic stock photography
+
+## What to Explicitly Avoid
+- No rounded buttons or cards
+- No bright/saturated colors — and no bright/shiny/yellow gold; antique gold must stay muted and metallic-looking, never neon or lemon-toned
+- No playful icons or emoji
+- No dense product-grid layouts anywhere on this page
+- No sticky "sale" banners, popups, or urgency-driven UI patterns
+- No stock corporate photography (people in suits shaking hands, generic office shots)
+- No more than two font families total
+- No animation longer than ~900ms or shorter than ~200ms — everything should feel deliberate, not instant and not sluggish
+- No inline appointment form on this page — Private Appointments must be a CTA/link only, since that flow lives on its own future page
+- No functional search/wishlist/account/bag logic — these are UI-only affordances for now (a search overlay opening is fine; actual search results, cart contents, or login are not needed)
+
+## Quick Reference — Nav & Section Map
+- Nav left: AVELIN ROUGE wordmark
+- Nav center/left links: The House · The World · Journal · Shop
+- Nav right icons: Wishlist · Search · Account · Bag
+- Homepage sections in order: Hero → Nav → The House (story/philosophy/heritage) → The Founder's Vision → Craftsmanship Pillars → The Collections (Courtship / Lingering Hour / Riders Quadrant, linking to future Shop page) → The Atelier (craftsmanship & tailoring, with real interior/tailoring imagery) → Private Appointments (bespoke, limited pieces, CTA to future separate page) → Footer
+
+Build this as one cohesive, scrollable homepage following the section order above, using the design system defined at the top consistently throughout.
