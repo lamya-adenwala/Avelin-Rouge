@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AVELIN ROUGE"
+description = "A fully interactive editorial homepage for AVELIN ROUGE, an ultra-luxury fashion house. Preserves the approved maison design while adding responsive navigation, search, utility states, and future-ready page routing."
+version = "1.0.0"
+id = "artifacts/avelin-rouge"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20664
+
+[services.development]
+run = "pnpm --filter @workspace/avelin-rouge run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/avelin-rouge", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/avelin-rouge/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20664"
+BASE_PATH = "/"
